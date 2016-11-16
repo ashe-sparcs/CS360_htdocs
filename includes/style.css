@@ -17,4 +17,21 @@ ul > li{
 }	
  ul > li:first-child{
 	width: 150px;			
-}		
+}
+label {
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 250px;
+    text-align: right;
+}
+input {
+  display: inline-block;
+  float: left;
+  margin-left: 10px;
+}
+select {
+  display: inline-block;
+  float: left;
+  margin-left: 10px;
+}				
