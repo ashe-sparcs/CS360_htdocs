@@ -21,14 +21,13 @@
 			$laptopArgs = array($model, $speed, $ram, $hd, $screen, $price);
 			$result2 = $conn->execute($prepQueryLaptop, $laptopArgs);
 			$queryResult = $result1 and $result2;
-			$selectResult = $conn->query("select * from product where model=" . $model);
-			if ($tuple = $selectResult->fetchRow()) {
+			$selectResult1 = $conn->query("select * from product where model=" . $model);
+			$selectResult2 = $conn->query("select * from laptop where model=" . $model);
+			if ($tuple1 = $selectResult1->fetchRow() and $tuple2 = $selectResult2->fetchRow()) {
 				$queryResult = true;
 			} else {
 				$queryResult = false;
 			}
-			$deleteQueryProduct = $conn->query("delete from product where model=" . $model);
-			$deleteQueryLaptop = $conn->query("delete from laptop where model=" . $model);
 		}
 		
 		return $queryResult;
@@ -56,7 +55,7 @@
 			if (insert_Laptop($conn, $maker, $model, $speed, $ram, $hd, $screen, $price)){
 				echo '<caption>The PC below is inserted.</caption>';
 			} else {
-				echo "<caption>The PC below can't be inserted. Model" . $model . " already exists.</caption>";
+				echo "<caption>The PC below can't be inserted. Model " . $model . " already exists.</caption>";
 			}
 			echo "<tr>";
 			for($i=0;$i<7;$i++) {
