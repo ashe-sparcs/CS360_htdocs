@@ -20,8 +20,6 @@
 			$prepQueryLaptop = $conn->prepare("insert into laptop values (?,?,?,?,?,?)");
 			$laptopArgs = array($model, $speed, $ram, $hd, $screen, $price);
 			$result2 = $conn->execute($prepQueryLaptop, $laptopArgs);
-			error_log($result1);
-			error_log($result2);
 			$queryResult = $result1 and $result2;
 			/*
 			$prepQuery_product = $conn->query("delete from product where model=" . $model);
@@ -48,10 +46,11 @@
 			$screen= $_GET['screen'];
 			$price = $_GET['price'];
 			
+			$commonString = "The laptop with (" . $maker . ", " . $model. ", " . $speed. ", " . $ram. ", " . $hd. ", " . $screen . ", " . $price . ")";
 			if (insert_Laptop($conn, $maker, $model, $speed, $ram, $hd, $screen, $price)){
-				echo "success";
+				echo $commonString . " is inserted.";
 			} else {
-				echo "fail";
+				echo $commonString . " can't be inserted.<br>The model " . $model . " already exists.";
 			}
 			$conn->disconnect();
 		}

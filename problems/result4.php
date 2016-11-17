@@ -139,7 +139,7 @@
 				echo "PC> MODEL: " . $mySystem["PC"]["MODEL"] . " SPEED: " . $mySystem["PC"]["SPEED"] . " RAM: " . $mySystem["PC"]["RAM"] . " HD: " . $mySystem["PC"]["HD"] . " PRICE: " . $mySystem["PC"]["PRICE"];
 			}
 			echo "<br>";
-			echo "Printer> MODEL: " . $mySystem["Printer"]["MODEL"] . " COLOR: " . $mySystem["Printer"]["COLOR"] . " TYPE: " . $mySystem["Printer"]["TYPE"] . " PRICE: " . $mySystem["Printer"]["PRICE"];
+			echo "Printer> MODEL: " . $mySystem["Printer"]["MODEL"] . " COLOR: " . $mySystem["Printer"]["color"] . " TYPE: " . $mySystem["Printer"]["type"] . " PRICE: " . $mySystem["Printer"]["PRICE"];
 			echo "<br><br>";
 			echo "Total price: " . $total;
 			$conn->disconnect();

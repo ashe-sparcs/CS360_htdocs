@@ -4,11 +4,27 @@
 ?>
 <p>Insert new Laptop information into tables Product and Laptop if there is no Laptop with that model number.</p>
 <p><b>No blanks are allowed.</b></p>
-<form action="result3.php" method="get">
+<script>
+function validate(form) {
+    // validation code here ...
+	var speed;
+	
+	speed = document.getElementById("speed").value;
+
+    if(speed >= 3.0) {
+        alert('A speed of Laptop should be less than 3.0');
+        return false;
+    }
+    else {
+		return true;
+    }
+}
+</script>
+<form onsubmit="return validate(this)" action="result3.php" method="get">
 	<div>
 		  <label>Manufacturer : </label><input type="text" name="maker"><br><br>
 		  <label>Model : </label><input type="text" name="model"><br><br>
-		  <label>Speed : </label><input type="text" name="speed"><br><br>
+		  <label>Speed : </label><input id="speed" type="text" name="speed"><br><br>
 		  <label>RAM : </label>
 		  <select name="ram">
 		      <option value="1">1GB</option>
