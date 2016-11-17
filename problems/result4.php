@@ -78,6 +78,7 @@
 		if ($minPC and !$minLaptop) {
 			$queryResult["PC"] = $minPC;
 		} elseif (!$minPC and $minLaptop) {
+			$isLaptop = true;
 			$queryResult["Laptop"] = $minLaptop;
 		} elseif (!$minPC and !$minLaptop) {
 			return false;
