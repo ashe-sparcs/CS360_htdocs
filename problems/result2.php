@@ -92,6 +92,26 @@
 		if (!PEAR::isError($conn)){
 			
 			/* Implement an ouput screen*/
+			$attributeName = array("MAKER", "MODEL", "RAM", "HD", "PRICE");
+			$queryResult = find_3PCs($conn, $_GET['desiredPrice']);
+			echo "<br><br>";
+			echo '<table border="1" align="center" style="width: 500px">';
+			echo "<tr>";
+			for($i=0;$i<5;$i++) {
+				echo "<th>" . $attributeName[$i] . "</th>";
+			}
+			echo "</tr>";
+			for($i=0;$i<3;$i++) {
+				$row = $queryResult[$i];
+				echo "<tr>";
+				for($j=0;$j<5;$j++) {
+					echo "<th>" . $row[$attributeName[$j]] . "</th>";
+				}
+				echo "</tr>";
+			}
+			echo '</table>';
+			
+			/*
 			echo 'maker model ram hd price';
 			echo '<br>';
 			$queryResult = find_3PCs($conn, $_GET['desiredPrice']);
@@ -99,6 +119,7 @@
 				echo join(' ', $queryResult[$i]);
 				echo '<br>';
 			}
+			*/
 			$conn->disconnect();
 		}
 		include('../includes/footer.html');

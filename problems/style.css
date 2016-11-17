@@ -1,0 +1,37 @@
+body {
+	padding: 0;
+	width: 600px;
+	margin: 0 auto;
+	text-align: center;
+}
+a {
+	text-decoration: none;
+}
+ul {
+	overflow: hidden;
+	list-style-type: none;
+}
+ul > li{
+	float: left;	
+	text-align: center;
+}	
+ ul > li:first-child{
+	width: 150px;			
+}
+label {
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 250px;
+    text-align: right;
+}
+input {
+  display: inline-block;
+  float: left;
+  margin-left: 10px;
+}
+select {
+  display: inline-block;
+  float: left;
+  margin-left: 10px;
+}				

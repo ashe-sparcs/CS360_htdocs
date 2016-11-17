@@ -6,8 +6,8 @@
 <form action="result2.php" method="get">
 	<!--Implement an input form -->
 	<div>
-		  <label>Enter a price : </label><input type="text" name="desiredPrice">
-		  <input type="submit" value="Find PCs">
+		  <label style="display: inline-block; width: 250px; float: left; clear: left; text-align: right">Enter a price : </label><input style="display: inline-block; float: left; margin-left: 10px" type="text" name="desiredPrice">
+		  <input style="display: inline-block; float: left; margin-left: 10px" type="submit" value="Find PCs">
 	</div>
 </form>
 <?php 

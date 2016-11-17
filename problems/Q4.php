@@ -8,9 +8,9 @@
 <form action="result4.php" method="get">
 	<!--Implement an input form -->
 	<div>
-		  <label>Budget : </label><input type="text" name="budget"><br><br>
-		  <label>Minimum speed : </label><input type="text" name="minimumSpeed"><br><br>
-		  <input type="submit" value="Find the PC or the Laptop" style="margin-left: 260px">
+		  <label style="display: inline-block; width: 250px; float: left; clear: left; text-align: right">Budget : </label><input style="display: inline-block; float: left; margin-left: 10px" type="text" name="budget"><br><br>
+		  <label style="display: inline-block; width: 250px; float: left; clear: left; text-align: right">Minimum speed : </label><input style="display: inline-block; float: left; margin-left: 10px" type="text" name="minimumSpeed"><br><br>
+		  <input style="display: inline-block; float: left; margin-left: 260px" type="submit" value="Find the PC or the Laptop">
 	</div>
 </form>
 <?php 

@@ -130,18 +130,60 @@
 			echo "Budget: " . $budget . " Speed: " . $speed;
 			echo "<br><br>";
 			$mySystem = find_system($conn,$budget,$speed);
-			echo "<br><br>";
-			if ($isLaptop) {
-				$total = $mySystem["Laptop"]["PRICE"] + $mySystem["Printer"]["PRICE"];
-				echo "Laptop> MODEL: " . $mySystem["Laptop"]["MODEL"] . " SPEED: " . $mySystem["Laptop"]["SPEED"] . " RAM: " . $mySystem["Laptop"]["RAM"] . " HD: " . $mySystem["Laptop"]["HD"] . " SCREEN: " . $mySystem["Laptop"]["SCREEN"] . " PRICE: " . $mySystem["Laptop"]["PRICE"];
+			if ($mySystem) {
+				if ($isLaptop) {
+					$attributeName = array('MANUFACTURER', 'MODEL', 'SPEED', 'RAM', 'HD', 'SCREEN', 'PRICE');
+					echo '<table border="1" align="center" style="width: 500px">';
+					echo '<caption>Laptop</caption>';
+					echo "<tr>";
+					for($i=0;$i<7;$i++) {
+						echo "<th>" . $attributeName[$i] . "</th>";
+					}
+					echo "</tr>";
+					echo "<tr>";
+					for($j=0;$j<7;$j++) {
+						echo "<th>" . $mySystem["Laptop"][$attributeName[$j]] . "</th>";
+					}
+					echo "</tr>";
+					echo '</table>';
+					$total = $mySystem["Laptop"]["PRICE"] + $mySystem["Printer"]["PRICE"];
+				} else {
+					$attributeName = array('MODEL', 'SPEED', 'RAM', 'HD', 'PRICE');
+					echo '<table border="1" align="center" style="width: 500px">';
+					echo '<caption>PC</caption>';
+					echo "<tr>";
+					for($i=0;$i<5;$i++) {
+						echo "<th>" . $attributeName[$i] . "</th>";
+					}
+					echo "</tr>";
+					echo "<tr>";
+					for($j=0;$j<5;$j++) {
+						echo "<th>" . $mySystem["PC"][$attributeName[$j]] . "</th>";
+					}
+					echo "</tr>";
+					echo '</table>';
+					$total = $mySystem["PC"]["PRICE"] + $mySystem["Printer"]["PRICE"];
+				}
+				echo "<br>";
+				$attributeName = array('MODEL', 'color', 'type', 'PRICE');
+				echo '<table border="1" align="center" style="width: 500px">';
+				echo '<caption>Printer</caption>';
+				echo "<tr>";
+				for($i=0;$i<4;$i++) {
+					echo "<th>" . strtoupper($attributeName[$i]) . "</th>";
+				}
+				echo "</tr>";
+				echo "<tr>";
+				for($j=0;$j<4;$j++) {
+					echo "<th>" . $mySystem["Printer"][$attributeName[$j]] . "</th>";
+				}
+				echo "</tr>";
+				echo '</table>';
+				echo "<br><br>";
+				echo "Total price: " . $total;
 			} else {
-				$total = $mySystem["PC"]["PRICE"] + $mySystem["Printer"]["PRICE"];
-				echo "PC> MODEL: " . $mySystem["PC"]["MODEL"] . " SPEED: " . $mySystem["PC"]["SPEED"] . " RAM: " . $mySystem["PC"]["RAM"] . " HD: " . $mySystem["PC"]["HD"] . " PRICE: " . $mySystem["PC"]["PRICE"];
+				echo "No systems satisfying budget and minimum speed.";
 			}
-			echo "<br>";
-			echo "Printer> MODEL: " . $mySystem["Printer"]["MODEL"] . " COLOR: " . $mySystem["Printer"]["color"] . " TYPE: " . $mySystem["Printer"]["type"] . " PRICE: " . $mySystem["Printer"]["PRICE"];
-			echo "<br><br>";
-			echo "Total price: " . $total;
 			$conn->disconnect();
 		}
 		include('../includes/footer.html');
