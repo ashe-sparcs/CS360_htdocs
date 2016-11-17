@@ -23,6 +23,10 @@
 		while ($tuple = $result->fetchRow()) {
 			array_push($user_tables, $tuple[0]);
 		}
+		$user_tables = 
+		array(
+		"TABLE_NAME" => $user_tables
+		);
 		return $user_tables;
 	}
 ?>

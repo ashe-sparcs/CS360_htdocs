@@ -10,7 +10,25 @@
 		$queryResult = true;
 
 		//implement..
-
+		$selectResult = $conn->query("select * from product where model=" . $model);
+		if ($tuple = $selectResult->fetchRow()) {
+			$queryResult = false;
+		} else {
+			$prepQueryProduct = $conn->prepare("insert into product values ('?',?,'laptop')");
+			$productArgs = array($maker, $model);
+			$result1 = $conn->execute($prepQueryProduct, $productArgs);
+			$prepQueryLaptop = $conn->prepare("insert into laptop values (?,?,?,?,?,?)");
+			$laptopArgs = array($model, $speed, $ram, $hd, $screen, $price);
+			$result2 = $conn->execute($prepQueryLaptop, $laptopArgs);
+			error_log($result1);
+			error_log($result2);
+			$queryResult = $result1 and $result2;
+			/*
+			$prepQuery_product = $conn->query("delete from product where model=" . $model);
+			$prepQuery_laptop = $conn->query("delete from laptop where model=" . $model);
+			*/
+		}
+		
 		return $queryResult;
 	}
 ?>
@@ -22,7 +40,19 @@
 		if (!PEAR::isError($conn)){
 
 			/* Implement an ouput screen*/
-
+			$maker = $_GET['maker'];
+			$model = $_GET['model'];
+			$speed = $_GET['speed'];
+			$ram= $_GET['ram'] * 1024;
+			$hd = $_GET['hd'];
+			$screen= $_GET['screen'];
+			$price = $_GET['price'];
+			
+			if (insert_Laptop($conn, $maker, $model, $speed, $ram, $hd, $screen, $price)){
+				echo "success";
+			} else {
+				echo "fail";
+			}
 			$conn->disconnect();
 		}
 		include('../includes/footer.html');

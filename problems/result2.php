@@ -34,7 +34,7 @@
 				"index" => -1
 				);
 		for ($i = 0; $i < 3; $i++) {
-			$new_diff = price_diff($arr[$i]["price"], $price);
+			$new_diff = price_diff($arr[$i]["PRICE"], $price);
 			if ($new_diff > $max_pair["diff"]) {
 				$max_pair["diff"] = $new_diff;
 				$max_pair["index"] = $i;
@@ -42,24 +42,46 @@
 		}
 		return $max_pair;
 	}
+	function find_min($arr, $price) {
+		$min_pair = 
+				array(
+				"diff" => INF, 
+				"index" => -1
+				);
+		for ($i = 0; $i < 3; $i++) {
+			$new_diff = price_diff($arr[$i]["PRICE"], $price);
+			if ($new_diff < $min_pair["diff"]) {
+				$min_pair["diff"] = $new_diff;
+				$min_pair["index"] = $i;
+			} 
+		}
+		return $min_pair;
+	}
 	function find_3PCs($conn,$price){
 		$queryResult = array();
+		$threePCs = array();
 		
 		//implement..
 		$result = $conn->query("select * from product, pc where product.model = pc.model");
 		for ($i = 0; $i < 3; $i++) {
 			$tuple = $result->fetchRow();
-			array_push($queryResult, array("maker" => $tuple[0], "model" => $tuple[1], "ram" => $tuple[5], "hd" => $tuple[6], "price" => $tuple[7]));
+			array_push($queryResult, array("MAKER" => $tuple[0], "MODEL" => $tuple[1], "RAM" => $tuple[5], "HD" => $tuple[6], "PRICE" => $tuple[7]));
 		}
 		$max_pair = find_max($queryResult, $price);
 		for ($i = 3; $tuple = $result->fetchRow(); $i++) {
 			$new_diff = price_diff($tuple[7], $price);
 			if ($new_diff < $max_pair["diff"]) {
-				$queryResult[$max_pair["index"]] = array("maker" => $tuple[0], "model" => $tuple[1], "ram" => $tuple[5], "hd" => $tuple[6], "price" => $tuple[7]);
+				$queryResult[$max_pair["index"]] = array("MAKER" => $tuple[0], "MODEL" => $tuple[1], "RAM" => $tuple[5], "HD" => $tuple[6], "PRICE" => $tuple[7]);
 				$max_pair = find_max($queryResult, $price);
 			}
 		}
-		return $queryResult;
+		$indexOfFirst = find_min($queryResult, $price)["index"];
+		$indexOfLast = find_max($queryResult, $price)["index"];
+		$indexOfMiddle = 3 - ($indexOfFirst + $indexOfLast);
+		$threePCs[0] = $queryResult[$indexOfFirst];
+		$threePCs[1] = $queryResult[$indexOfMiddle];
+		$threePCs[2] = $queryResult[$indexOfLast];
+		return $threePCs;
 	}
 ?>
 <?php

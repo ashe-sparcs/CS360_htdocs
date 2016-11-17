@@ -5,8 +5,10 @@
 <p>Find at most 3 PCs whose prices are closet to the desired price.</p>
 <form action="result2.php" method="get">
 	<!--Implement an input form -->
-	Enter a price : <input type="text" name="desiredPrice">
-	<input type="submit" value="Find PCs">
+	<div>
+		  <label>Enter a price : </label><input type="text" name="desiredPrice">
+		  <input type="submit" value="Find PCs">
+	</div>
 </form>
 <?php 
 	include('../includes/footer.html');

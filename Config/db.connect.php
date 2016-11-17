@@ -6,9 +6,17 @@
 	//This file provides the database access information
 	//This file also establishes a connection to your Oracle database
 
-	//Set the database access information as constants	
+	//Set the database access information as constants
+	
+	DEFINE('DB_USER','s20140602');
+	DEFINE('DB_PASSWORD','20140602');
+	
+	/*
 	DEFINE('DB_USER','s20140679');
 	DEFINE('DB_PASSWORD','elqldhkdrlaelql');
+	*/
+	
+	
 
 	//Don't touch as below
 	DEFINE('DB_ADDR','oci8://'.DB_USER.':'.DB_PASSWORD.'@dbclick.kaist.ac.kr:1521/orcl');
