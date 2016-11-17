@@ -75,7 +75,13 @@
 				$minLaptop["PRICE"] = $tuple[5];
 			}
 		}
-		if ($minPC["PRICE"] < $minLaptop["PRICE"]) {
+		if ($minPC and !$minLaptop) {
+			$queryResult["PC"] = $minPC;
+		} elseif (!$minPC and $minLaptop) {
+			$queryResult["Laptop"] = $minLaptop;
+		} elseif (!$minPC and !$minLaptop) {
+			return false;
+		} elseif ($minPC["PRICE"] < $minLaptop["PRICE"]) {
 			$queryResult["PC"] = $minPC;
 		} else {
 			$isLaptop = true;
